@@ -48,6 +48,10 @@ const alignments = {
   'full': 'fully'
 }
 
+const chapterView = chapter => {
+  return config.view[chapter.location]
+}
+
 const center = (config, i) => {
   return config.view[config.chapters[i].location].center
 }
@@ -141,6 +145,30 @@ const tell = () => {
     footer.setAttribute('id', 'footer')
     story.appendChild(footer)
   }
+
+  let scroller = scrollama()
+
+  map.on('load', () => {
+    scroller
+    .setup({
+      step: '.step',
+      offset: 0.5,
+      progress: true
+    })
+    .onStepEnter(response => {
+      let chapter = config.chapters.find(chap => chap.id === response.element.id)
+      response.element.classList.add('active')
+      map[chapter.mapAnimation || 'flyTo'](chapterView(chapter))
+console.log(map.flyTo)
+console.log(map.flyTo(chapterView(chapter)))
+    })
+    .onStepExit(response => {
+      let chapter = config.chapters.find(chap => chap.id === response.element.id)
+      response.element.classList.remove('active')
+    })
+  })
+
+  window.addEventListener('resize', scroller.resize)
 }
 
 const showMap = async () => {
