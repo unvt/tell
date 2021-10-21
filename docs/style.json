@@ -1,0 +1,33 @@
+{
+  "version": 8,
+  "center": [
+    17.53,
+    38.1
+  ],
+  "zoom": 2.8,
+  "sources": {
+    "relief": {
+      "type": "raster",
+      "minzoom": 0,
+      "maxzoom": 5,
+      "tileSize": 512,
+      "tiles": [
+        "https://optgeo.github.io/relief/zxy/{z}/{x}/{y}.png"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "rgb(91, 146, 229)"
+      }
+    },
+    {
+      "id": "relief",
+      "type": "raster",
+      "source": "relief"
+    }
+  ]
+}
