@@ -103,7 +103,8 @@ const tell = () => {
 
     if (record.title) {
       let e = document.createElement('h3')
-      e.innerText = record.title
+      e.innerHTML = '<a target="' + record.id + 
+        '" href="' + record.url + '">' + record.title + '</a>'
       chapter.appendChild(e)
     }
 
